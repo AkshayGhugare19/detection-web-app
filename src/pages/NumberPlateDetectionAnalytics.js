@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NumberPlateDetection=()=> {
+const NumberPlateDetectionAnalytics=()=> {
   return (
     <div>
       <h1 className="text-2xl font-bold">Number plate Detection</h1>
@@ -9,4 +9,4 @@ const NumberPlateDetection=()=> {
   );
 }
 
-export default NumberPlateDetection;
+export default NumberPlateDetectionAnalytics;

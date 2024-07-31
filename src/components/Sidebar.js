@@ -11,7 +11,7 @@ const Sidebar =()=> {
 
   return (
     <div className="w-64 bg-gray-900 text-white min-h-screen">
-      <div className="p-4 text-xl font-bold">Dashboard</div>
+      <Link to="/" ><div className="p-4 text-xl font-bold">Dashboard</div></Link>
       <ul>
         <li>
           <button 
@@ -26,10 +26,10 @@ const Sidebar =()=> {
           {isGunDetectionOpen && (
             <ul className="pl-8">
               <li>
-                <Link to="/gun-detection/analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
+                <Link to="/gun-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
               </li>
               <li>
-                <Link to="/gun-detection/events" className="block p-4 hover:bg-gray-600">Events</Link>
+                <Link to="/gun-detection-events" className="block p-4 hover:bg-gray-600">Events</Link>
               </li>
             </ul>
           )}

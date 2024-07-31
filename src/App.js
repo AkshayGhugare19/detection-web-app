@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import GunDetection from './pages/GunDetection';
-import FireDetection from './pages/FireDetection';
-import NumberPlateDetection from './pages/NumberPlateDetection';
-import Settings from './pages/Settings';
-import StartDetection from './pages/StartDetection';
+import GunDetectionAnalytics from './pages/GunDetectionAnalytics';
+import GunDetectionEvents from './pages/GunDetectionEvents';
+import FireDetectionAnalyitcs from './pages/FireDetectionAnalyitcs';
+import FireDetectionEvents from './pages/FireDetectionEvents';
+import NumberPlateDetectionAnalytics from './pages/NumberPlateDetectionAnalytics';
+import NumberPlateDetectionEvents from './pages/NumberPlateDetectionEvents';
+
 
 
 function App() {
@@ -15,11 +17,12 @@ function App() {
         <Sidebar />
         <div className="flex-1 p-4">
           <Routes>
-            <Route path="/" element={<StartDetection />} />
-            <Route path="/gun-detection" element={<GunDetection />} />
-            <Route path="/fire-detection" element={<FireDetection />} />
-            <Route path="/number-plate-detection" element={<NumberPlateDetection />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/gun-detection-analytics" element={<GunDetectionAnalytics />} />
+            <Route path="/gun-detection-events" element={<GunDetectionEvents />} />
+            <Route path="/fire-detection-analytics" element={<FireDetectionAnalyitcs />} />
+            <Route path="/fire-detection-events" element={<FireDetectionEvents />} />
+            <Route path="/number-plate-detection-analytics" element={<NumberPlateDetectionAnalytics />} />
+            <Route path="/number-plate-detection-events" element={<NumberPlateDetectionEvents />} />
           </Routes>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GunDetection=()=> {
+const GunDetectionAnalytics=()=> {
   return (
     <div>
       <h1 className="text-2xl font-bold">Gun Detection</h1>
@@ -9,4 +9,4 @@ const GunDetection=()=> {
   );
 }
 
-export default GunDetection;
+export default GunDetectionAnalytics;
