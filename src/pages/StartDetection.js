@@ -1,4 +1,3 @@
-// src/pages/StartDetection.js
 import React from 'react';
 
 const StartDetection =()=> {

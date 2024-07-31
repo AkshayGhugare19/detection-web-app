@@ -3,27 +3,28 @@ import { Link } from 'react-router-dom';
 import { FaFire, FaCar, FaCogs, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { MdOutlineGavel } from 'react-icons/md';
 
-const Sidebar =()=> {
-  const [isGunDetectionOpen, setIsGunDetectionOpen] = useState(false);
-  const [isFireDetectionOpen, setIsFireDetectionOpen] = useState(false);
-  const [isNumberPlateDetectionOpen, setIsNumberPlateDetectionOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+const Sidebar = () => {
+  const [openMenu, setOpenMenu] = useState(null);
+
+  const handleMenuClick = (menu) => {
+    setOpenMenu(openMenu === menu ? null : menu);
+  };
 
   return (
     <div className="w-64 bg-gray-900 text-white min-h-screen">
-      <Link to="/" ><div className="p-4 text-xl font-bold">Dashboard</div></Link>
+      <Link to="/"><div className="p-4 text-xl font-bold">Dashboard</div></Link>
       <ul>
         <li>
           <button 
-            onClick={() => setIsGunDetectionOpen(!isGunDetectionOpen)} 
+            onClick={() => handleMenuClick('gunDetection')} 
             className="flex items-center justify-between w-full p-4 hover:bg-gray-700"
           >
             <span className="flex items-center">
               <MdOutlineGavel className="mr-2" /> Gun Detection
             </span>
-            {isGunDetectionOpen ? <FaChevronUp /> : <FaChevronDown />}
+            {openMenu === 'gunDetection' ? <FaChevronUp /> : <FaChevronDown />}
           </button>
-          {isGunDetectionOpen && (
+          {openMenu === 'gunDetection' && (
             <ul className="pl-8">
               <li>
                 <Link to="/gun-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
@@ -36,57 +37,57 @@ const Sidebar =()=> {
         </li>
         <li>
           <button 
-            onClick={() => setIsNumberPlateDetectionOpen(!isNumberPlateDetectionOpen)} 
+            onClick={() => handleMenuClick('numberPlateDetection')} 
             className="flex items-center justify-between w-full p-4 hover:bg-gray-700"
           >
             <span className="flex items-center">
               <FaCar className="mr-2" /> Number Plate Detection
             </span>
-            {isNumberPlateDetectionOpen ? <FaChevronUp /> : <FaChevronDown />}
+            {openMenu === 'numberPlateDetection' ? <FaChevronUp /> : <FaChevronDown />}
           </button>
-          {isNumberPlateDetectionOpen && (
+          {openMenu === 'numberPlateDetection' && (
             <ul className="pl-8">
               <li>
-                <Link to="/number-plate-detection/analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
+                <Link to="/number-plate-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
               </li>
               <li>
-                <Link to="/number-plate-detection/events" className="block p-4 hover:bg-gray-600">Events</Link>
+                <Link to="/number-plate-detection-events" className="block p-4 hover:bg-gray-600">Events</Link>
               </li>
             </ul>
           )}
         </li>
         <li>
           <button 
-            onClick={() => setIsFireDetectionOpen(!isFireDetectionOpen)} 
+            onClick={() => handleMenuClick('fireDetection')} 
             className="flex items-center justify-between w-full p-4 hover:bg-gray-700"
           >
             <span className="flex items-center">
               <FaFire className="mr-2" /> Fire Detection
             </span>
-            {isFireDetectionOpen ? <FaChevronUp /> : <FaChevronDown />}
+            {openMenu === 'fireDetection' ? <FaChevronUp /> : <FaChevronDown />}
           </button>
-          {isFireDetectionOpen && (
+          {openMenu === 'fireDetection' && (
             <ul className="pl-8">
               <li>
-                <Link to="/fire-detection/analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
+                <Link to="/fire-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
               </li>
               <li>
-                <Link to="/fire-detection/events" className="block p-4 hover:bg-gray-600">Events</Link>
+                <Link to="/fire-detection-events" className="block p-4 hover:bg-gray-600">Events</Link>
               </li>
             </ul>
           )}
         </li>
         <li>
           <button 
-            onClick={() => setIsSettingsOpen(!isSettingsOpen)} 
+            onClick={() => handleMenuClick('settings')} 
             className="flex items-center justify-between w-full p-4 hover:bg-gray-700"
           >
             <span className="flex items-center">
               <FaCogs className="mr-2" /> Settings
             </span>
-            {isSettingsOpen ? <FaChevronUp /> : <FaChevronDown />}
+            {openMenu === 'settings' ? <FaChevronUp /> : <FaChevronDown />}
           </button>
-          {isSettingsOpen && (
+          {openMenu === 'settings' && (
             <ul className="pl-8">
               <li>
                 <Link to="/settings/add-camera" className="block p-4 hover:bg-gray-600">Add Camera</Link>
