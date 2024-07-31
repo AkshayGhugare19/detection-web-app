@@ -11,6 +11,8 @@ import StartDetection from './pages/StartDetection';
 import UserTable from './modules/settings/userTable';
 import AddRole from './modules/settings/addRole';
 import AnalyticsDetails from './pages/AnalyticsDetails';
+import AddCamera from './pages/AddCamera';
+import CameraDetails from './pages/CameraDetails';
 
 
 
@@ -31,6 +33,8 @@ function App() {
             <Route path="/settings/add-user" element={<UserTable />} />
             <Route path="/settings/add-role" element={<AddRole />} />
             <Route path="/gun-detection-analytics-details/:id" element={<AnalyticsDetails />} />
+            <Route path="/settings/add-camera" element={<AddCamera />} />
+            <Route path="/camera-details/:id" element={<CameraDetails />} />
           </Routes>
         </div>
       </div>
