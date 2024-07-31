@@ -10,6 +10,7 @@ import NumberPlateDetectionEvents from './pages/NumberPlateDetectionEvents';
 import StartDetection from './pages/StartDetection';
 import UserTable from './modules/settings/userTable';
 import AddRole from './modules/settings/addRole';
+import AnalyticsDetails from './pages/AnalyticsDetails';
 
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/number-plate-detection-events" element={<NumberPlateDetectionEvents />} />
             <Route path="/settings/add-user" element={<UserTable />} />
             <Route path="/settings/add-role" element={<AddRole />} />
+            <Route path="/gun-detection-analytics-details/:id" element={<AnalyticsDetails />} />
           </Routes>
         </div>
       </div>

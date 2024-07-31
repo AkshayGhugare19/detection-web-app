@@ -1,11 +1,12 @@
 // src/components/GunAnalyticsTable.js
 import React from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const dummyData = [
-  { id: 1, cameraName: 'Camera 1', status: 'Active' },
-  { id: 2, cameraName: 'Camera 2', status: 'Inactive' },
-  { id: 3, cameraName: 'Camera 3', status: 'Active' },
+  { id: 1, cameraName: 'Camera 1', status: 'Active', detectionType:"weapon", },
+  { id: 2, cameraName: 'Camera 2', status: 'Inactive', detectionType:"weapon", },
+  { id: 3, cameraName: 'Camera 3', status: 'Active', detectionType:"weapon", },
   // Add more dummy data as needed
 ];
 
@@ -21,6 +22,7 @@ const GunAnalyticsTable = () => {
             <th className="py-2 px-4 border-b">Id</th>
             <th className="py-2 px-4 border-b">Camera Name</th>
             <th className="py-2 px-4 border-b">Status</th>
+            <th className="py-2 px-4 border-b">Detection Type</th>
             <th className="py-2 px-4 border-b">Actions</th>
           </tr>
         </thead>
@@ -30,10 +32,11 @@ const GunAnalyticsTable = () => {
               <td className="py-2 px-4 border-b text-center">{item.id}</td>
               <td className="py-2 px-4 border-b text-center">{item.cameraName}</td>
               <td className="py-2 px-4 border-b text-center">{item.status}</td>
+              <td className="py-2 px-4 border-b text-center">{item.detectionType}</td>
               <td className="py-2 px-4 border-b text-center">
-                <button className="text-blue-500 hover:text-blue-700">
-                  <AiOutlineEye />
-                </button>
+                <div className="text-blue-500 hover:text-blue-700 cursor-pointer flex justify-center items-center">
+                  <Link to={`/gun-detection-analytics-details/${item.id}`}><AiOutlineEye /></Link>
+                </div>
               </td>
             </tr>
           ))}

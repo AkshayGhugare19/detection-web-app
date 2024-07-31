@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const dummyData = [
   { id: 1, cameraName: 'Camera 1', status: 'Active' },
@@ -30,9 +31,9 @@ const GunEventTable = () => {
               <td className="py-2 px-4 border-b text-center">{item.cameraName}</td>
               <td className="py-2 px-4 border-b text-center">{item.status}</td>
               <td className="py-2 px-4 border-b text-center">
-                <button className="text-blue-500 hover:text-blue-700">
-                  <AiOutlineEye />
-                </button>
+              <div className="text-blue-500 hover:text-blue-700 cursor-pointer flex justify-center items-center">
+                  <Link to={`/gun-detection-analytics-details/${item.id}`}><AiOutlineEye /></Link>
+                </div>
               </td>
             </tr>
           ))}
