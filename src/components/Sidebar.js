@@ -30,7 +30,7 @@ const Sidebar = () => {
                 <Link to="/gun-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
               </li>
               <li>
-                <Link to="/gun-detection-events" className="block p-4 hover:bg-gray-600">Events</Link>
+                <Link to="/gun-detection-events" className="block p-4 hover:bg-gray-600">Notifications</Link>
               </li>
             </ul>
           )}
@@ -51,7 +51,7 @@ const Sidebar = () => {
                 <Link to="/number-plate-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
               </li>
               <li>
-                <Link to="/number-plate-detection-events" className="block p-4 hover:bg-gray-600">Events</Link>
+                <Link to="/number-plate-detection-events" className="block p-4 hover:bg-gray-600">Notifications</Link>
               </li>
             </ul>
           )}
@@ -72,7 +72,7 @@ const Sidebar = () => {
                 <Link to="/fire-detection-analytics" className="block p-4 hover:bg-gray-600">Analytics</Link>
               </li>
               <li>
-                <Link to="/fire-detection-events" className="block p-4 hover:bg-gray-600">Events</Link>
+                <Link to="/fire-detection-events" className="block p-4 hover:bg-gray-600">Notifications</Link>
               </li>
             </ul>
           )}

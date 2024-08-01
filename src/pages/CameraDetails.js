@@ -1,37 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const CameraDetails = () => {
   // Static data
   const detectionTime = "2024-07-31 15:45:00";
-  const cameraName = "Laptop Camera";
+  const cameraName = " Camera 1";
 
   // State to control video playback
   const [isPlaying, setIsPlaying] = useState(false);
-  const [stream, setStream] = useState(null);
-  const videoRef = useRef(null);
 
   // Start the webcam stream
-  const startCamera = async () => {
-    try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setStream(mediaStream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
-      setIsPlaying(true);
-    } catch (error) {
-      console.error("Error accessing webcam: ", error);
-      alert("Failed to access the webcam. Please check your camera permissions.");
-    }
+  const startCamera = () => {
+    setIsPlaying(true);
   };
 
   // Stop the webcam stream
   const stopCamera = () => {
-    if (stream) {
-      const tracks = stream.getTracks();
-      tracks.forEach(track => track.stop());
-      setStream(null);
-    }
     setIsPlaying(false);
   };
 
@@ -41,14 +24,13 @@ const CameraDetails = () => {
       <div className="lg:w-1/2 w-full p-4">
         <div className="mb-4">
           <h2 className="text-2xl font-bold mb-2">Live Stream</h2>
-          <video 
-            ref={videoRef}
-            autoPlay
-            muted
-            className="rounded shadow-md"
-            width="100%"
-            height="auto"
-          />
+          {isPlaying ? (
+            <img src="http://localhost:5000/video_feed" alt="Live Stream" className="w-full h-auto bg-black" />
+          ) : (
+            <div className="w-full h-64 bg-black flex items-center justify-center text-white">
+              <p>Camera is stopped</p>
+            </div>
+          )}
         </div>
         <div className="flex space-x-4">
           <button
