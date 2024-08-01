@@ -1,8 +1,7 @@
 // import { store } from "app/store"
 import axios from "axios"
-const API_URL ="http://localhost:8080"
+const API_URL ="http://localhost:5000"
 // import accessToken from "./jwt-token-access/accessToken"
-
 //pass new generated access token here
 const token = ''
 

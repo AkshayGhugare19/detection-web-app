@@ -10,7 +10,8 @@ const dummyData = [
   // Add more dummy data as needed
 ];
 
-const GunAnalyticsTable = () => {
+const GunAnalyticsTable = ({gunDetectionData}) => {
+  console.log("rrr",gunDetectionData);
   return (
     <div className="p-4">
       <div className='flex justify-end w-full'>
@@ -25,16 +26,18 @@ const GunAnalyticsTable = () => {
             <th className="py-2 px-4 border-b">Camera Name</th>
             <th className="py-2 px-4 border-b">Status</th>
             <th className="py-2 px-4 border-b">Detection Type</th>
+            <th className="py-2 px-4 border-b">Date</th>
             <th className="py-2 px-4 border-b">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {dummyData.map((item) => (
+          {gunDetectionData?.length && gunDetectionData.map((item) => (
             <tr key={item.id}>
               <td className="py-2 px-4 border-b text-center">{item.id}</td>
-              <td className="py-2 px-4 border-b text-center">{item.cameraName}</td>
-              <td className="py-2 px-4 border-b text-center">{item.status}</td>
-              <td className="py-2 px-4 border-b text-center">{item.detectionType}</td>
+              <td className="py-2 px-4 border-b text-center">camera1</td>
+              <td className="py-2 px-4 border-b text-center">active</td>
+              <td className="py-2 px-4 border-b text-center">{item.type}</td>
+              <td className="py-2 px-4 border-b text-center">{item.created_at}</td>
               <td className="py-2 px-4 border-b text-center">
                 <div className="text-blue-500 hover:text-blue-700 cursor-pointer flex justify-center items-center">
                   <Link to={`/gun-detection-analytics-details/${item.id}`}><AiOutlineEye /></Link>
