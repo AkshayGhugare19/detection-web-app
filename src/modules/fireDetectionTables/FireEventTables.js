@@ -21,9 +21,11 @@ const FireEventTable = () => {
       <table className="min-w-full bg-white border">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b">Id</th>
+          <th className="py-2 px-4 border-b">Id</th>
             <th className="py-2 px-4 border-b">Camera Name</th>
             <th className="py-2 px-4 border-b">Status</th>
+            <th className="py-2 px-4 border-b">Detection Type</th>
+            <th className="py-2 px-4 border-b">Date</th>
             <th className="py-2 px-4 border-b">Actions</th>
           </tr>
         </thead>
