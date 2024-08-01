@@ -11,9 +11,11 @@ const dummyData = [
 const UserTable = () => {
   return (
     <div className="p-4">
+        <div className='flex justify-end w-full'>
       <button className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
         Add New User
       </button>
+      </div>
       <table className="min-w-full bg-white border">
         <thead>
           <tr>
@@ -26,10 +28,10 @@ const UserTable = () => {
         <tbody>
           {dummyData.map((item) => (
             <tr key={item.id}>
-              <td className="py-2 px-4 border-b">{item.id}</td>
-              <td className="py-2 px-4 border-b">{item.name}</td>
-              <td className="py-2 px-4 border-b">{item.email}</td>
-              <td className="py-2 px-4 border-b">{item.role}</td>
+              <td className="py-2 px-4 border-b text-center">{item.id}</td>
+              <td className="py-2 px-4 border-b text-center">{item.name}</td>
+              <td className="py-2 px-4 border-b text-center">{item.email}</td>
+              <td className="py-2 px-4 border-b text-center">{item.role}</td>
             </tr>
           ))}
         </tbody>
