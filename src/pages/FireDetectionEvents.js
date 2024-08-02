@@ -7,10 +7,11 @@ const FireDetectionEvents = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [whatsappMessage, setWhatsappMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingMail, setLoadingMail] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [whatsappError, setWhatsappError] = useState('');
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async() => {
     if (!email || !emailMessage) {
       setEmailError('Please fill in both fields');
       return;
@@ -19,6 +20,21 @@ const FireDetectionEvents = () => {
     // Implement email sending logic here
     console.log('Sending email to:', email);
     console.log('Email message:', emailMessage);
+    setLoadingMail(true)
+    const payload = {
+      body: emailMessage,
+      receiver_emails: [email],
+      type:"fire"
+    };
+
+    try {
+      const response = await apiPOST('/send-mail', payload);
+      alert('Mail send successful');
+    } catch (error) {
+      alert('Failed to send WhatsApp message');
+    } finally {
+      setLoadingMail(false);
+    }
   };
 
   const handleSendWhatsapp = async () => {
@@ -77,8 +93,8 @@ const FireDetectionEvents = () => {
           onClick={handleSendEmail}
           className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
         >
-          Send Email
-        </button>
+           {loadingMail?"Sending..":"Send Email"}      
+             </button>
       </div>
 
       <div className="bg-white p-6 rounded shadow-md">

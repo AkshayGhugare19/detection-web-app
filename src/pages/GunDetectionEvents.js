@@ -7,10 +7,11 @@ const GunDetectionEvents = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [whatsappMessage, setWhatsappMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingMail, setLoadingMail] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [whatsappError, setWhatsappError] = useState('');
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async() => {
     if (!email || !emailMessage) {
       setEmailError('Please fill in both fields');
       return;
@@ -19,6 +20,21 @@ const GunDetectionEvents = () => {
     // Implement email sending logic here
     console.log('Sending email to:', email);
     console.log('Email message:', emailMessage);
+    setLoadingMail(true)
+    const payload = {
+      body: emailMessage,
+      receiver_emails: [email],
+      type:"weapon"
+    };
+
+    try {
+      const response = await apiPOST('/send-mail', payload);
+      alert('Mail send successful');
+    } catch (error) {
+      alert('Failed to send WhatsApp message');
+    } finally {
+      setLoadingMail(false);
+    }
   };
 
   const handleSendWhatsapp = async () => {
@@ -50,8 +66,8 @@ const GunDetectionEvents = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-2xl font-bold mb-6">Fire Detection Notification</h1>
-      <p className="mb-4">Content for Fire detection page.</p>
+      <h1 className="text-2xl font-bold mb-6">Gun Detection Notification</h1>
+      <p className="mb-4">Content for Gun detection page.</p>
 
       <div className="bg-white p-6 rounded shadow-md mb-6">
         <h2 className="text-xl font-bold mb-4">Send Email Notification</h2>
@@ -77,7 +93,7 @@ const GunDetectionEvents = () => {
           onClick={handleSendEmail}
           className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
         >
-          Send Email
+          {loadingMail?"Sending..":"Send Email"}
         </button>
       </div>
 
