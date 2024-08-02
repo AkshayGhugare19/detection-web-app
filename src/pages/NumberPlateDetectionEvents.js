@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiPOST } from '../utilities/apiHelpers';
 
 const NumberPlateDetectionEvents = () => {
   const [email, setEmail] = useState('');
@@ -6,10 +7,19 @@ const NumberPlateDetectionEvents = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [whatsappMessage, setWhatsappMessage] = useState('');
 
-  const handleSendEmail = () => {
+  const handleSendEmail =async () => {
     // Implement email sending logic here
     console.log('Sending email to:', email);
     console.log('Email message:', emailMessage);
+    const payload={
+      subject:"ok ok",
+      body:emailMessage,
+      recever_Emails:email 
+    }
+    const response = await apiPOST(`/send-mail`,payload)
+    if(response){
+      alert("Mail send successful")
+    }
   };
 
   const handleSendWhatsapp = () => {
@@ -43,7 +53,7 @@ const NumberPlateDetectionEvents = () => {
           />
         </div>
         <button
-          onClick={handleSendEmail}
+          onClick={()=>handleSendEmail()}
           className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
         >
           Send Email
