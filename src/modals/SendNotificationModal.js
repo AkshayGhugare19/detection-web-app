@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import Select from 'react-select';
-import { apiGET } from '../utilities/apiHelpers';
+import { apiGET, apiPOST } from '../utilities/apiHelpers';
 
 const SendNotificationModal = ({ itemId, onClose }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -12,13 +12,22 @@ const SendNotificationModal = ({ itemId, onClose }) => {
     setSelectedUsers(selectedOptions || []);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const selectedUserDetails = users.filter(user =>
-      selectedUsers.some(selected => selected.value === user.id.toString())
+      selectedUsers.some(selected => selected?.value === user?.id.toString())
     );
+    
     console.log('Sending notification to:', selectedUserDetails);
     console.log('Message:', message);
+    const payload={
+        phone_number: selectedUserDetails?.phone_number || '9049422621',
+        message: message || "This is a test notification for one detection"
+    }
+    const response = await apiPOST(`send-perticular-notification-on-whatsapp/${itemId}`,payload)
+    if(response){
+      alert('Notification send successful');
+    }
     // Handle sending notification logic here
     onClose();
   };
