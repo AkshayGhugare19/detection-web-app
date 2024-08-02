@@ -6,32 +6,52 @@ const NumberPlateDetectionEvents = () => {
   const [emailMessage, setEmailMessage] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [whatsappMessage, setWhatsappMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [whatsappError, setWhatsappError] = useState('');
 
-  const handleSendEmail =async () => {
+  const handleSendEmail = () => {
+    if (!email || !emailMessage) {
+      setEmailError('Please fill in both fields');
+      return;
+    }
+    setEmailError('');
     // Implement email sending logic here
     console.log('Sending email to:', email);
     console.log('Email message:', emailMessage);
-    const payload={
-      subject:"ok ok",
-      body:emailMessage,
-      recever_Emails:email 
-    }
-    const response = await apiPOST(`/send-mail`,payload)
-    if(response){
-      alert("Mail send successful")
-    }
   };
 
-  const handleSendWhatsapp = () => {
-    // Implement WhatsApp sending logic here
+  const handleSendWhatsapp = async () => {
+    if (!mobileNumber || !whatsappMessage) {
+      setWhatsappError('Please fill in both fields');
+      return;
+    }
+    setWhatsappError('');
+    setLoading(true);
+
     console.log('Sending WhatsApp message to:', mobileNumber);
     console.log('WhatsApp message:', whatsappMessage);
+
+    const payload = {
+      phone_number: mobileNumber,
+      message: whatsappMessage,
+      type: 'weapon' // Assuming type should be fire detection
+    };
+
+    try {
+      const response = await apiPOST('/send-notification-on-whatsapp', payload);
+      alert('WhatsApp send successful');
+    } catch (error) {
+      alert('Failed to send WhatsApp message');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-2xl font-bold mb-6">Number plate Detection Notification</h1>
-      <p className="mb-4">Content for Number plate detection page.</p>
+      <h1 className="text-2xl font-bold mb-6">Fire Detection Notification</h1>
+      <p className="mb-4">Content for Fire detection page.</p>
 
       <div className="bg-white p-6 rounded shadow-md mb-6">
         <h2 className="text-xl font-bold mb-4">Send Email Notification</h2>
@@ -52,8 +72,9 @@ const NumberPlateDetectionEvents = () => {
             onChange={(e) => setEmailMessage(e.target.value)}
           />
         </div>
+        {emailError && <p className="text-red-500 mb-4">{emailError}</p>}
         <button
-          onClick={()=>handleSendEmail()}
+          onClick={handleSendEmail}
           className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
         >
           Send Email
@@ -79,11 +100,13 @@ const NumberPlateDetectionEvents = () => {
             onChange={(e) => setWhatsappMessage(e.target.value)}
           />
         </div>
+        {whatsappError && <p className="text-red-500 mb-4">{whatsappError}</p>}
         <button
           onClick={handleSendWhatsapp}
-          className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"
+          className={`px-4 py-2 text-white rounded ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
+          disabled={loading}
         >
-          Send WhatsApp
+          {loading ? 'Sending...' : 'Send WhatsApp'}
         </button>
       </div>
     </div>

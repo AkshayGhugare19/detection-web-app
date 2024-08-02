@@ -32,7 +32,7 @@ function App() {
             <Route path="/number-plate-detection-events" element={<NumberPlateDetectionEvents />} />
             <Route path="/settings/add-user" element={<UserTable />} />
             <Route path="/settings/add-role" element={<AddRole />} />
-            <Route path="/gun-detection-analytics-details/:id" element={<AnalyticsDetails />} />
+            <Route path="/detection-analytics-details/:id" element={<AnalyticsDetails />} />
             <Route path="/settings/add-camera" element={<AddCamera />} />
             <Route path="/camera-details/:id" element={<CameraDetails />} />
           </Routes>

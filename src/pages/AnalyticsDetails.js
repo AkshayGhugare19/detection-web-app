@@ -13,7 +13,7 @@ const AnalyticsDetails = () => {
     try {
       const response = await apiGET(`/get-analytics-by/${param.id}`);
       console.log("<<<<$$$$",response)
-      if(response.status===200){
+      if(response){
         setAnalyticsData(response.data);
       }
     } catch (error) {
