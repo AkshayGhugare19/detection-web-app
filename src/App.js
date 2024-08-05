@@ -13,6 +13,7 @@ import AddRole from './modules/settings/addRole';
 import AnalyticsDetails from './pages/AnalyticsDetails';
 import AddCamera from './pages/AddCamera';
 import CameraDetails from './pages/CameraDetails';
+import Dashboard from './pages/DashboardPage';
 
 
 
@@ -23,7 +24,7 @@ function App() {
         <Sidebar />
         <div className="flex-1 p-4">
           <Routes>
-            {/* <Route path="/" element={<StartDetection />} /> */}
+            <Route path="/" element={<Dashboard />} />
             <Route path="/gun-detection-analytics" element={<GunDetectionAnalytics />} />
             <Route path="/gun-detection-events" element={<GunDetectionEvents />} />
             <Route path="/fire-detection-analytics" element={<FireDetectionAnalyitcs />} />
