@@ -21,10 +21,10 @@ const SendNotificationModal = ({ itemId, onClose }) => {
     console.log('Sending notification to:', selectedUserDetails);
     console.log('Message:', message);
     const payload={
-        phone_number: selectedUserDetails?.phone_number || '9049422621',
-        message: message || "This is a test notification for one detection"
+        "phone_number": selectedUserDetails[0]?.phone_number ,
+        "message": message 
     }
-    const response = await apiPOST(`send-perticular-notification-on-whatsapp/${itemId}`,payload)
+    const response = await apiPOST(`/send-perticular-notification-on-whatsapp/${itemId}`,payload)
     if(response){
       alert('Notification send successful');
     }
