@@ -50,7 +50,7 @@ function App() {
             path={path}
             element={
               <ProtectedRoute>
-                <div className="flex">
+                <div className="flex h-[80vh]">
                   <Sidebar />
                   <main className="flex-1 p-4">
                     <Component />
