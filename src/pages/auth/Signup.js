@@ -21,7 +21,7 @@ const Signup = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Name</label>
+        <label className="block text-sm font-medium text-white">Name</label>
         <input
           type="text"
           value={name}
@@ -31,7 +31,7 @@ const Signup = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Email</label>
+        <label className="block text-sm font-medium text-white">Email</label>
         <input
           type="email"
           value={email}
@@ -41,7 +41,7 @@ const Signup = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+        <label className="block text-sm font-medium text-white">Phone Number</label>
         <input
           type="text"
           value={phoneNumber}
@@ -51,7 +51,7 @@ const Signup = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Password</label>
+        <label className="block text-sm font-medium text-white">Password</label>
         <input
           type="password"
           value={password}

@@ -19,7 +19,7 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Email or Phone</label>
+        <label className="block text-sm font-medium text-white">Email or Phone</label>
         <input
           type="text"
           value={emailOrPhone}
@@ -29,7 +29,7 @@ const Login = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Password</label>
+        <label className="block text-sm font-medium text-white">Password</label>
         <input
           type="password"
           value={password}
