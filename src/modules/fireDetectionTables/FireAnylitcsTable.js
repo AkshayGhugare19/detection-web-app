@@ -15,15 +15,18 @@ const dummyData = [
 const FireAnalyticsTable = ({ fireDetectionData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [selectedItemSendType, setSelectedItemSendType] = useState(null);
 
-  const openModal = (itemId) => {
+  const openModal = (itemId,type) => {
     setSelectedItemId(itemId);
     setIsModalOpen(true);
+    setSelectedItemSendType(type)
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedItemId(null);
+    setSelectedItemSendType(null)
   };
 
   return (
@@ -59,11 +62,11 @@ const FireAnalyticsTable = ({ fireDetectionData }) => {
                   </Link>
                   <FaWhatsappSquare  size={20}
                     className=" hover:text-blue-700 cursor-pointer"
-                    onClick={() => openModal(item.id)}
+                    onClick={(type) => openModal(item.id,type="whatsapp")}
                   />
                   <IoMdMail  size={20}
                     className=" hover:text-blue-700 cursor-pointer"
-                    // onClick={() => openModal(item.id)}
+                    onClick={(type) => openModal(item.id,type="mail")}
                   />
                 </div>
               </td>
@@ -74,6 +77,7 @@ const FireAnalyticsTable = ({ fireDetectionData }) => {
       {isModalOpen && (
         <SendNotificationModal
           itemId={selectedItemId}
+          sendType={selectedItemSendType}
           onClose={closeModal}
         />
       )}

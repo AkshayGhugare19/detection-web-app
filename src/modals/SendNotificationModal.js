@@ -3,7 +3,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Select from 'react-select';
 import { apiGET, apiPOST } from '../utilities/apiHelpers';
 
-const SendNotificationModal = ({ itemId, onClose }) => {
+const SendNotificationModal = ({ itemId,sendType, onClose }) => {
+  console.log("sendType",sendType)
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState([]);
@@ -11,22 +12,34 @@ const SendNotificationModal = ({ itemId, onClose }) => {
   const handleUserChange = (selectedOptions) => {
     setSelectedUsers(selectedOptions || []);
   };
-
+  
   const handleSubmit = async(event) => {
     event.preventDefault();
     const selectedUserDetails = users.filter(user =>
       selectedUsers.some(selected => selected?.value === user?.id.toString())
     );
-    
-    console.log('Sending notification to:', selectedUserDetails);
-    console.log('Message:', message);
-    const payload={
+    console.log("selectedUserDetails", selectedUserDetails)
+    const mails = selectedUserDetails?.map((item)=>item.email)
+    if(sendType==="whatsapp"){
+      const payload={
         "phone_number": selectedUserDetails[0]?.phone_number ,
         "message": message 
     }
     const response = await apiPOST(`/send-perticular-notification-on-whatsapp/${itemId}`,payload)
     if(response){
       alert('Notification send successful');
+    }
+    }else if(sendType==="mail"){
+      const payload={
+        "receiver_emails": mails ,
+        "message": message 
+    }
+    const response = await apiPOST(`/send-particular-notification-on-mail/${itemId}`,payload)
+    if(response){
+      alert('Notification send successful');
+    }
+    }else{
+      console.log("something went wrong")
     }
     // Handle sending notification logic here
     onClose();
