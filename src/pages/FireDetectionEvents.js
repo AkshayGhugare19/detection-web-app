@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { apiPOST } from '../utilities/apiHelpers';
+import { FaWhatsappSquare } from 'react-icons/fa';
+import { IoMdMail } from 'react-icons/io';
 
 const FireDetectionEvents = () => {
   const [email, setEmail] = useState('');
@@ -91,8 +93,9 @@ const FireDetectionEvents = () => {
         {emailError && <p className="text-red-500 mb-4">{emailError}</p>}
         <button
           onClick={handleSendEmail}
-          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+          className="px-4 py-2 flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
         >
+          <IoMdMail  size={20}/>
            {loadingMail?"Sending..":"Send Email"}      
              </button>
       </div>
@@ -119,9 +122,11 @@ const FireDetectionEvents = () => {
         {whatsappError && <p className="text-red-500 mb-4">{whatsappError}</p>}
         <button
           onClick={handleSendWhatsapp}
-          className={`px-4 py-2 text-white rounded ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
+          className={`px-4 py-2 flex items-center gap-2 text-white rounded ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'}`}
           disabled={loading}
         >
+                    <FaWhatsappSquare  size={20}/>
+
           {loading ? 'Sending...' : 'Send WhatsApp'}
         </button>
       </div>
