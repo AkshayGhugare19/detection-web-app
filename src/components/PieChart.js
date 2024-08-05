@@ -11,8 +11,8 @@ const PieChart = ({ data, title }) => {
     datasets: [
       {
         data: data.values,
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        borderColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        backgroundColor: ['#DCDDFA', '#5253E8', '#A8A8D1'], // Grey and Blue shades
+        borderColor: ['#DCDDFA', '#5253E8', '#A8A8D1'],
         borderWidth: 1,
       },
     ],
@@ -20,7 +20,7 @@ const PieChart = ({ data, title }) => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold mb-4 text-center">{title}</h2>
+      <h2 className="text-xl font-semibold mb-2 text-center ">{title}</h2>
       <Pie data={chartData} />
     </div>
   );

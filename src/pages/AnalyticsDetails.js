@@ -3,28 +3,36 @@ import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import { apiGET } from '../utilities/apiHelpers';
+import DotLoader from '../components/DotLoader';
 
 
 const AnalyticsDetails = () => {
   const param = useParams()
   const [analyticsData,setAnalyticsData]=useState('')
+  const [loading,setLoading]=useState(false)
   console.log("eee",analyticsData)
 
   const getAnalyticsData = async()=>{
     try {
+      setLoading(true)
       const response = await apiGET(`/get-analytics-by/${param.id}`);
       console.log("<<<<$$$$",response)
       if(response){
         setAnalyticsData(response.data);
+        setLoading(false)
       }
     } catch (error) {
       console.error('Error:', error);
+      setLoading(false)
     }
   }
 
   useEffect(()=>{
     getAnalyticsData()
   },[])
+
+  if(loading) return <DotLoader/>
+
   return (
     <div className="flex flex-col lg:flex-row bg-gray-100 min-h-screen p-8">
       <div className="lg:w-1/2 w-full p-4">

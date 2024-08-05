@@ -1,6 +1,7 @@
 // src/components/UserTable.js
 import React, { useEffect, useState } from 'react';
 import { apiGET, apiPOST } from '../../utilities/apiHelpers';
+import DotLoader from '../../components/DotLoader';
 
 const dummyData = [
   { id: 1, name: 'John Doe', email: 'john.doe@example.com', role: 'Admin' },
@@ -13,7 +14,8 @@ const UserTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUser, setNewUser] = useState({ name: '', email: '', phone: '' });
   const [users, setUsers] = useState([]);
-console.log("www",users)
+  const [loading,setLoading]=useState(false)
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -37,13 +39,16 @@ console.log("www",users)
 
   const getUsers = async ()=>{
     try {
+      setLoading(true)
       const response = await apiGET(`/get-user`);
       console.log("<<<<Users",response)
       if(response.status===200){
         setUsers(response.data);
+        setLoading(false)
       }
     } catch (error) {
       console.error('Error:', error);
+      setLoading(false)
     }
   }
 
@@ -67,6 +72,8 @@ console.log("www",users)
   useEffect(()=>{
     getUsers()
   },[])
+
+  if(loading) return <DotLoader/>
 
   return (
     <div className="p-4">

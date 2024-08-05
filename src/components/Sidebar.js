@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFire, FaCar, FaCogs, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { MdOutlineGavel } from 'react-icons/md';
+import { FaGun } from 'react-icons/fa6';
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -20,7 +21,7 @@ const Sidebar = () => {
             className="flex items-center justify-between w-full p-4 hover:bg-gray-700"
           >
             <span className="flex items-center">
-              <MdOutlineGavel className="mr-2" /> Gun Detection
+              <FaGun className="mr-2" /> Weapon Detection
             </span>
             {openMenu === 'gunDetection' ? <FaChevronUp /> : <FaChevronDown />}
           </button>

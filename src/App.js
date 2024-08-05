@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import GunDetectionAnalytics from './pages/GunDetectionAnalytics';
 import GunDetectionEvents from './pages/GunDetectionEvents';
@@ -7,40 +7,79 @@ import FireDetectionAnalyitcs from './pages/FireDetectionAnalyitcs';
 import FireDetectionEvents from './pages/FireDetectionEvents';
 import NumberPlateDetectionAnalytics from './pages/NumberPlateDetectionAnalytics';
 import NumberPlateDetectionEvents from './pages/NumberPlateDetectionEvents';
-import StartDetection from './pages/StartDetection';
 import UserTable from './modules/settings/userTable';
 import AddRole from './modules/settings/addRole';
 import AnalyticsDetails from './pages/AnalyticsDetails';
 import AddCamera from './pages/AddCamera';
 import CameraDetails from './pages/CameraDetails';
 import Dashboard from './pages/DashboardPage';
+import AuthPage from './pages/auth/AuthPage';
 
+const publicRoutes = [
+  { path: '/auth', component: AuthPage },
+];
 
+const protectedRoutes = [
+  { path: '/', component: Dashboard },
+  { path: '/gun-detection-analytics', component: GunDetectionAnalytics },
+  { path: '/gun-detection-events', component: GunDetectionEvents },
+  { path: '/fire-detection-analytics', component: FireDetectionAnalyitcs },
+  { path: '/fire-detection-events', component: FireDetectionEvents },
+  { path: '/number-plate-detection-analytics', component: NumberPlateDetectionAnalytics },
+  { path: '/number-plate-detection-events', component: NumberPlateDetectionEvents },
+  { path: '/settings/add-user', component: UserTable },
+  { path: '/settings/add-role', component: AddRole },
+  { path: '/detection-analytics-details/:id', component: AnalyticsDetails },
+  { path: '/settings/add-camera', component: AddCamera },
+  { path: '/camera-details/:id', component: CameraDetails },
+];
 
 function App() {
   return (
     <Router>
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 p-4">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/gun-detection-analytics" element={<GunDetectionAnalytics />} />
-            <Route path="/gun-detection-events" element={<GunDetectionEvents />} />
-            <Route path="/fire-detection-analytics" element={<FireDetectionAnalyitcs />} />
-            <Route path="/fire-detection-events" element={<FireDetectionEvents />} />
-            <Route path="/number-plate-detection-analytics" element={<NumberPlateDetectionAnalytics />} />
-            <Route path="/number-plate-detection-events" element={<NumberPlateDetectionEvents />} />
-            <Route path="/settings/add-user" element={<UserTable />} />
-            <Route path="/settings/add-role" element={<AddRole />} />
-            <Route path="/detection-analytics-details/:id" element={<AnalyticsDetails />} />
-            <Route path="/settings/add-camera" element={<AddCamera />} />
-            <Route path="/camera-details/:id" element={<CameraDetails />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        {/* Public Routes */}
+        {publicRoutes.map(({ path, component: Component }) => (
+          <Route key={path} path={path} element={<Component />} />
+        ))}
+        
+        {/* Protected Routes */}
+        {protectedRoutes.map(({ path, component: Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <ProtectedRoute>
+                <div className="flex">
+                  <Sidebar />
+                  <main className="flex-1 p-4">
+                    <Component />
+                  </main>
+                </div>
+              </ProtectedRoute>
+            }
+          />
+        ))}
+
+        {/* Redirect to auth if not authenticated and accessing a protected route */}
+        <Route path="*" element={<Navigate to="/auth" />} />
+      </Routes>
     </Router>
   );
+}
+
+function ProtectedRoute({ children }) {
+  const location = useLocation();
+  const isAuthRoute = location.pathname === '/auth';
+
+  // Replace this with actual authentication logic
+  const isAuthenticated = true; // Example: check if user is authenticated
+
+  if (isAuthRoute) {
+    return children;
+  }
+
+  return isAuthenticated ? children : <Navigate to="/auth" />;
 }
 
 export default App;

@@ -71,7 +71,7 @@ const FireAnalyticsTable = ({ fireDetectionData }) => {
                 </div>
               </td>
             </tr>
-          )):"Loading..."}
+          )):"Data not found"}
         </tbody>
       </table>
       {isModalOpen && (
