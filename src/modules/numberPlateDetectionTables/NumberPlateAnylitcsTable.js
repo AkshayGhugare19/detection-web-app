@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { AiOutlineEye, AiOutlineBell } from 'react-icons/ai';
+import { AiOutlineEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import SendNotificationModal from '../../modals/SendNotificationModal';
+import { FaWhatsappSquare } from 'react-icons/fa';
+import { IoMdMail } from 'react-icons/io';
 
 const dummyData = [
   { id: 1, cameraName: 'Camera 1', status: 'Active', actions: 'View' },
@@ -53,11 +55,15 @@ const NumberPlateAnylitcsTable = ({ NumberPlateDetectionData }) => {
               <td className="py-2 px-4 border-b text-center">
                 <div className="flex justify-center items-center space-x-2">
                   <Link to={`/detection-analytics-details/${item.id}`}>
-                    <AiOutlineEye className="text-blue-500 hover:text-blue-700 cursor-pointer" />
+                    <AiOutlineEye size={20} className=" hover:text-blue-700 cursor-pointer" />
                   </Link>
-                  <AiOutlineBell 
-                    className="text-blue-500 hover:text-blue-700 cursor-pointer"
+                  <FaWhatsappSquare  size={20}
+                    className=" hover:text-blue-700 cursor-pointer"
                     onClick={() => openModal(item.id)}
+                  />
+                  <IoMdMail  size={20}
+                    className=" hover:text-blue-700 cursor-pointer"
+                    // onClick={() => openModal(item.id)}
                   />
                 </div>
               </td>
