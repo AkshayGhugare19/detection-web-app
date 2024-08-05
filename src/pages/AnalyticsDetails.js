@@ -8,6 +8,7 @@ import { apiGET } from '../utilities/apiHelpers';
 const AnalyticsDetails = () => {
   const param = useParams()
   const [analyticsData,setAnalyticsData]=useState('')
+  console.log("eee",analyticsData)
 
   const getAnalyticsData = async()=>{
     try {
@@ -43,11 +44,11 @@ const AnalyticsDetails = () => {
           <h2 className="text-3xl font-bold mb-4">Detection Details</h2>
           <div className="mb-4">
             <h3 className="text-xl font-semibold">Time of Detection:</h3>
-            <p className="text-gray-700">{"detectionTime"}</p>
+            <p className="text-gray-700">{analyticsData?.created_at}</p>
           </div>
           <div className="mb-4">
             <h3 className="text-xl font-semibold">Camera Name:</h3>
-            <p className="text-gray-700">{"cameraName"}</p>
+            <p className="text-gray-700">{"Camera 1"}</p>
           </div>
         </div>
       </div>
