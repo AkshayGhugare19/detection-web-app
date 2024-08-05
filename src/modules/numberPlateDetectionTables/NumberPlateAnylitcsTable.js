@@ -48,7 +48,7 @@ const NumberPlateAnylitcsTable = ({ NumberPlateDetectionData }) => {
           </tr>
         </thead>
         <tbody>
-          {NumberPlateDetectionData?.length && NumberPlateDetectionData?.map((item) => (
+          {NumberPlateDetectionData?.length ? NumberPlateDetectionData?.length && NumberPlateDetectionData?.map((item) => (
             <tr key={item.id}>
               <td className="py-2 px-4 border-b text-center">{item.id}</td>
               <td className="py-2 px-4 border-b text-center">camera 1</td>
@@ -71,7 +71,7 @@ const NumberPlateAnylitcsTable = ({ NumberPlateDetectionData }) => {
                 </div>
               </td>
             </tr>
-          ))}
+          )):"loading..."}
         </tbody>
       </table>
       {isModalOpen && (

@@ -48,7 +48,7 @@ const GunAnalyticsTable = ({ gunDetectionData }) => {
           </tr>
         </thead>
         <tbody>
-          {gunDetectionData?.length && gunDetectionData.map((item) => (
+          {gunDetectionData?.length ? gunDetectionData?.length && gunDetectionData.map((item) => (
             <tr key={item.id}>
               <td className="py-2 px-4 border-b text-center">{item.id}</td>
               <td className="py-2 px-4 border-b text-center">camera1</td>
@@ -71,7 +71,7 @@ const GunAnalyticsTable = ({ gunDetectionData }) => {
                 </div>
               </td>
             </tr>
-          ))}
+          )):"loading..."}
         </tbody>
       </table>
       {isModalOpen && (
