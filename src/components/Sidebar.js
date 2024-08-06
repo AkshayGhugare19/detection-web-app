@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFire, FaCar, FaCogs, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { MdOutlineGavel } from 'react-icons/md';
 import { FaGun } from 'react-icons/fa6';
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
+  const navigate = useNavigate()
 
   const handleMenuClick = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
+  const logout = () => {
+    localStorage.removeItem('user')
+    navigate("/auth")
+  }
   return (
     <div className="w-64 bg-gray-900 text-white min-h-screen">
-      <Link to="/"><div className="p-4 text-xl font-bold">Dashboard</div></Link>
+      <div className='flex flex-col justify-between h-screen'>
+        <div>
+        <Link to="/"><div className="p-4 text-xl font-bold">Dashboard</div></Link>
       <ul>
         <li>
           <button 
@@ -103,6 +110,13 @@ const Sidebar = () => {
           )}
         </li>
       </ul>
+      
+        </div>
+        <div>
+        <div onClick={logout} className="p-4 text-xl font-bold cursor-pointer text-center border border-l-0">Logout</div>
+
+        </div>
+      </div>
     </div>
   );
 }

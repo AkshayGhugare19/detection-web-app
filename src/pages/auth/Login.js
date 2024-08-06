@@ -10,28 +10,39 @@ const Login = () => {
     const navigate = useNavigate()
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+        setLoading(true)
       const payload = {
         "email": emailOrPhone,
         "password": password
-      }
-      const response = await apiPOST(`/login`,payload)
-      console.log("<<<<Login",response)
-      if(response.status===200){
-        navigate("/")
-        toast.success("login successful")
-      }else{
-        console.error('Invalid credentials')
-        toast.error("Invalid credentials")
+      };
+      const response = await apiPOST(`/login`, payload);
+      console.log("<<<<Login", response);
+      if (response.status === 200) {
+        // Set user data in localStorage
+        const userData = response.data.user;
+        localStorage.setItem('user', JSON.stringify(userData));
+        setLoading(false)
+        
+        navigate("/");
+        toast.success("Login successful");
+      } else {
+        console.error('Invalid credentials');
+        toast.error("Invalid credentials");
+        setLoading(false)
+
       }
     } catch (error) {
       console.error('Login error:', error);
+      setLoading(false)
+
       // Handle error (e.g., show error message)
     }
-  };
+};
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -57,9 +68,10 @@ const Login = () => {
       </div>
       <button
         type="submit"
+        disabled={loading}
         className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-transform transform hover:scale-105"
       >
-        Login
+        {loading ? "Loading...":"Login"}
       </button>
     </form>
   );
