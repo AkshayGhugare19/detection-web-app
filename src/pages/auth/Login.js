@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { apiPOST } from '../../utilities/apiHelpers';
+import { useNavigate } from 'react-router-dom';
+import SuccessAlert from '../../modals/SuccessAlert';
+import ErrorAlert from '../../modals/ErrorAlert';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+    const navigate = useNavigate()
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/login', { emailOrPhone, password });
-      // Handle success (e.g., redirect to dashboard)
+      const payload = {
+        "email": emailOrPhone,
+        "password": password
+      }
+      const response = await apiPOST(`/login`,payload)
+      console.log("<<<<Login",response)
+      if(response.status===200){
+        navigate("/")
+        toast.success("login successful")
+      }else{
+        console.error('Invalid credentials')
+        toast.error("Invalid credentials")
+      }
     } catch (error) {
       console.error('Login error:', error);
       // Handle error (e.g., show error message)

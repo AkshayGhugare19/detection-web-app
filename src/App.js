@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './components/Sidebar';
 import GunDetectionAnalytics from './pages/GunDetectionAnalytics';
 import GunDetectionEvents from './pages/GunDetectionEvents';
@@ -64,6 +66,7 @@ function App() {
         {/* Redirect to auth if not authenticated and accessing a protected route */}
         <Route path="*" element={<Navigate to="/auth" />} />
       </Routes>
+      <ToastContainer />
     </Router>
   );
 }
